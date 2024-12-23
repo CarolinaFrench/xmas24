@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dein Weihnachtsgeschenk</title>
+    <style>
+      @font-face {
+        font-family: "Ethnocentric";
+        src: url(ethnocentric/Ethnocentric\ Rg.otf);
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000000;
+        font-family: "Ethnocentric", sans-serif;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #gift-container {
+        position: relative;
+        text-align: center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #gift {
+        width: 200px;
+        cursor: pointer;
+        animation: shake 1.5s infinite;
+      }
+
+      svg {
+        height: 3rem;
+        width: 3rem;
+        margin-top: 0.5rem;
+        filter: drop-shadow(0px 0px 9px #2d99ff);
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        10% {
+          transform: translateY(-10px);
+        }
+        20% {
+          transform: translateY(10px);
+        }
+        30% {
+          transform: translateY(-10px);
+        }
+        40% {
+          transform: translateY(10px);
+        }
+        50% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      #tooltip {
+        position: absolute;
+        top: 12.5%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #ffffff;
+        text-shadow: 0 0 5px #2d99ff, 0 0 10px #2d99ff, 0 0 15px #2d99ff,
+          0 0 75px #2d99ff;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-size: 2.5rem;
+        opacity: 1;
+        transition: opacity 0.5s;
+      }
+
+      #video {
+        display: none;
+        width: 100%;
+        max-width: 400px;
+        opacity: 0;
+        transition: opacity 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gift-container">
+      <div id="tooltip">
+        Geschenk öffnen
+        <br />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="40px"
+          viewBox="0 -960 960 960"
+          width="40px"
+          fill="#fff"
+        >
+          <path
+            d="M427.33-830v496L204.67-555.67l-74 75 350 350L830-480l-74.67-76-222 222v-496h-106Z"
+          />
+        </svg>
+      </div>
+      <img
+        id="gift"
+        src="assets/gift.png"
+        alt="Geschenk"
+        onclick="openGift()"
+      />
+      <video id="video" controls autoplay>
+        <source src="assets/video.mp4" type="video/mp4" />
+        Dein Browser unterstützt dieses Videoformat nicht.
+      </video>
+    </div>
+
+    <script>
+      function openGift() {
+        const gift = document.getElementById("gift");
+        const tooltip = document.getElementById("tooltip");
+        const video = document.getElementById("video");
+
+        // Fade out gift and tooltip
+        gift.style.transition = "opacity 0.5s";
+        tooltip.style.transition = "opacity 0.5s";
+        gift.style.opacity = "0";
+        tooltip.style.opacity = "0";
+
+        setTimeout(() => {
+          gift.style.display = "none";
+          tooltip.style.display = "none";
+
+          // Show and fade in the video
+          video.style.display = "block";
+          setTimeout(() => {
+            video.style.opacity = "1";
+          }, 50);
+        }, 500);
+      }
+    </script>
+  </body>
+</html>
